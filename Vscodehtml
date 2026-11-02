@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SportsSync</title>
+</head>
+<body style="background-color: orange;">
+    <h1 style="text-align: center; color: blue;">SportsSync Management System</h1>
+    <h2 style="text-align: center; color: red;">Select a module to continue</h2>
+    
+    <div style="text-align: center; border: 2px solid black; padding: 20px; width: 150px; margin: 0 auto;">
+        <a href="team_page.html"><h2>Team</h2></a>
+        <span style="color: purple;">Register and view team details</span>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Team Registration</title>
+</head>
+<body style="background-color: lightblue;">
+    <h1 style="color: purple;">Team registration</h1>
+    
+    <div class="box">
+        <h2>Register Team</h2>
+        
+        <label for="team-id">Team ID:</label>
+        <br><br>
+        <input id="team-id" type="text" placeholder="enter team ID" oninput="clearMessage()">
+        <br><br>
+        
+        <label for="teamname">Team name:</label>
+        <br><br>
+        <input id="teamname" type="text" placeholder="enter team name" oninput="clearMessage()">
+        <br><br>
+        
+        <label for="team-coach">Team coach:</label>
+        <br><br>
+        <input id="team-coach" type="text" placeholder="enter team coach" oninput="clearMessage()">
+        <br><br>
+        
+        <label for="team-sport">Team sport:</label>
+        <br><br>
+        <input id="team-sport" type="text" placeholder="enter team sport" oninput="clearMessage()">
+        <br><br>
+        
+        <label for="team-members-input">team members</label>
+        <br><br>
+        <input id="team-members-input" type="text" placeholder="enter team members" oninput="clearMessage()">
+        <br><br>
+
+        <button onclick="addMember()" style="background-color: purple; color: white; padding: 10px 20px; border: none; cursor: pointer;">Add Member</button>
+        <p id="message"></p>
+    </div>
+
+    <div id="tableSection" style="display: none; margin-top: 30px; background: white; padding: 20px; border-radius: 5px; max-width: 600px;">
+        <h3>Registered Details</h3>
+        <table id="team-members-table" border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background-color: purple; color: white;">
+                    <th>Team ID</th>
+                    <th>Team Name</th>
+                    <th>Coach</th>
+                    <th>Sport</th>
+                    <th>Member Name</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+<script>
+    function addMember() {
+        const memberInput = document.getElementById('team-members-input');
+        const memberName = memberInput.value.trim();
+        const message = document.getElementById('message');
+        
+        if (memberName) {
+            var teamname = document.getElementById('teamname').value.trim();
+            var teamId = document.getElementById('team-id').value.trim();
+            var teamCoach = document.getElementById('team-coach').value.trim();
+            var teamSport = document.getElementById('team-sport').value.trim();
+            
+            if(teamId=="" || teamname=="" || teamCoach=="" || teamSport==""){
+                alert("Please fill all the fields");
+                return;
+            }
+            
+            var table = document.getElementById('team-members-table');
+            var row = table.insertRow(-1);
+            row.insertCell(0).innerHTML = teamId;
+            row.insertCell(1).innerHTML = teamname;
+            row.insertCell(2).innerHTML = teamCoach;
+            row.insertCell(3).innerHTML = teamSport;
+            row.insertCell(4).innerHTML = memberName;
+            
+            document.getElementById("tableSection").style.display = "block";
+            message.textContent = "Member added successfully!";
+            message.style.color = "green";
+
+            memberInput.value = "";
+        } else {
+            alert("Please enter a team member name");
+        }
+    }
+
+    function clearMessage() {
+        document.getElementById('message').textContent = "";
+    }
+</script>
+</body>
+</html>
